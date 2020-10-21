@@ -7,6 +7,8 @@ import { useConvictions, getConvictions } from "./ConvictionProvider.js"
 // Get a reference to the DOM element where the <select> will be rendered
 const contentTarget = document.querySelector(".filters__crime")
 
+// START WRITING NEW CODE HERE! ADDING AN EVENTHUB
+
 export const ConvictionSelect = () => {
     // Get all convictions from application state
     getConvictions().then(() => {
