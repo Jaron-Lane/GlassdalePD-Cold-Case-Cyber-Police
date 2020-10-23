@@ -49,6 +49,8 @@ eventHub.addEventListener("crimeChosen", event => {
 })
 
 
+// review lines 68-115 of criminal list to review 
+
 
 
 
