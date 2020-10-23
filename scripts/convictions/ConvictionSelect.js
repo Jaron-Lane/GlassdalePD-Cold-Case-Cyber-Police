@@ -4,10 +4,15 @@
  */
 import { useConvictions, getConvictions } from "./ConvictionProvider.js"
 
+
+
+// Get a reference to the DOM element where the eventHub should go
+const eventHub = document.querySelector(".container")
+
+
 // Get a reference to the DOM element where the <select> will be rendered
 const contentTarget = document.querySelector(".filters__crime")
 
-// START WRITING NEW CODE HERE! ADDING AN EVENTHUB
 
 export const ConvictionSelect = () => {
     // Get all convictions from application state
@@ -16,6 +21,7 @@ export const ConvictionSelect = () => {
     render(convictions)
     })
 }
+
 
 const render = (convictionsCollection) => {
     /*
@@ -28,10 +34,27 @@ const render = (convictionsCollection) => {
             <option value="0">Please select a crime...</option>
             ${
                 convictionsCollection.map(convictionObj => {
-                    const conviction = convictionObj.name 
                     return `<option value="${convictionObj.id}">${conviction}</option>`
-                })
+                }).join("")
             }
         </select>
     `
 }
+
+
+// This tells my event hub, which I just created for the .container, to listen for a change!
+eventHub.addEventListener("change", event => {
+
+    // only change if 'crimeSelect' is changed!
+    if (event.target.id === "crimeSelect") {
+        // now create a custom event. Provide an appropriate name.
+        const customEventToDispatch = new CustomEvent("crimeChosen", {
+            detail: {
+                crimeThatWasChosen: event.target.value
+            }
+        })
+
+        // the event has to be dispatched to the event hub
+        eventHub.dispatchEvent(customEventToDispatch)
+    }
+})
