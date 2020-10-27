@@ -11,7 +11,6 @@ That's your Event Hub. Get a reference to it here.
 */
 const eventHub = document.querySelector(".container")
 
-// console.log
 
 // Get a reference to the DOM element where the <select> will be rendered
 const contentTarget = document.querySelector(".filters__officer")
@@ -44,6 +43,7 @@ const render = (officerCollection) => {
 // On the event hub, listen for a "change" event.
 eventHub.addEventListener("change", changeEvent => {
     if (changeEvent.target.id === "officerSelect") {
+        console.log("OfficerSelect: Change event happened in the officers dropdown")
         // Get the name of the selected officer
         const selectedOfficer = changeEvent.target.value
 
@@ -53,7 +53,7 @@ eventHub.addEventListener("change", changeEvent => {
                 officer: selectedOfficer
             }
         })
-
+        
         // Dispatch event to event hub
         eventHub.dispatchEvent(officerSelectCustomEvent)
     }

@@ -1,4 +1,5 @@
 import { useConvictions } from '../convictions/ConvictionProvider.js'
+import { useOfficers } from '../officers/OfficerProvider.js'
 import { getCriminals, useCriminals } from './CriminalProvider.js'
 import { Criminals } from "./Criminals.js"
 
@@ -48,10 +49,61 @@ eventHub.addEventListener("crimeChosen", event => {
     }
 })
 
+// Listen for the custom event you dispatched in OfficerSelect
+eventHub.addEventListener("officerSelected", event => {
+    console.log(event)
+    // debugger
+    // Use the property you added to the event detail.
+        if (event.detail.officer !=="0") {
+            //Get the list of officers
+            const officersArray = useOfficers()
+            
+            const criminalsArray = useCriminals()
+
+            const officerThatWasChosen = officersArray.find(officerObj => {
+                return officerObj.id === parseInt(event.detail.officer)
+                // '+' means parsInt
+            })
+
+            const filteredCriminalsArray = criminalsArray.filter(criminalObj => {
+                return criminalObj.arrestingOfficer === officerThatWasChosen.name
+            })
+
+            render(filteredCriminalsArray)
+        }
+
+
+
+        // console.log("array of officers", officersArray)
+
+        /* 
+        We have the the id of the officer that the user selected from the drop down. But each officer object has the name of the crime they were convicted for. So we need to get the name of the conviction associated with the unique identifier. 
+        */
+
+        // Get the array of officers
+
+
+        // Use the find method to get the first object in the officerss array that has the same id as the id of the chosen crime
+
+
+        // console.log("convictionThatWasChosen", convictionThatWasChosen)
+
+        /*
+        Now that we have the name of the chosen officeer, filter the officerss application state down to the people that arrested the criminal
+        */
+
+
+        // console.log("filteredOfficersArray", filteredOfficersArray)
+
+    /*
+      Then invoke render() and pass the filtered collection as
+      an argument
+    */
+
+
 
 // review lines 68-115 of criminal list to review 
 
 
 
-
-
+})
