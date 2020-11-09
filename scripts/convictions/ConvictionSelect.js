@@ -44,7 +44,7 @@ const render = (convictionsCollection) => {
 
 // This tells my event hub, which I just created for the .container, to listen for a change!
 eventHub.addEventListener("change", event => {
-
+    console.log(event)
     // only change if 'crimeSelect' is changed!
     if (event.target.id === "crimeSelect") {
         // now create a custom event. Provide an appropriate name.
