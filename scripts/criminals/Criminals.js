@@ -11,6 +11,10 @@ export const Criminals = (criminalObject) => {
     `
 }
 
+
+
+
+
 // somehow need to get the name and the alibi of the known associates
 // need to iterate over the array to get the known_associate ^^
 // this is goiong to be part of a click event??
@@ -25,3 +29,6 @@ export const Criminals = (criminalObject) => {
 // Which component should react to that custom event?
 // Does data need to be send along with the event?
 // Which DOM element would contain the list of alibis? Do you need a new one, or can they go in an existing one? A POP UP WINDOW, ID LIKE TO USE A NEW DOM ELEMENT
+
+
+// TO-DO make new alibi module, look at possible components, and then make corresponding components: ???
