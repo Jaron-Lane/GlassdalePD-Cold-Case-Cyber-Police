@@ -1,15 +1,26 @@
 const eventHub = document.querySelector(".container")
 
-export const Criminals = (criminalObject) => {
+export const Criminals = (criminalObject, facilities) => {
     return `
-        <div class="criminal">
-            <p class="criminal__name"><h3>${criminalObject.name}</h3></p>
-            <p class="criminal__age">Age: ${criminalObject.age}</p>
-            <p class="criminal__crime">Crime: ${criminalObject.conviction}</p>
-            <p class="criminal__term__start">Term start: ${new Date(criminalObject.incarceration.start).toLocaleDateString('en-US')}</p>
-            <p class="criminal__term__end">Term end: ${new Date(criminalObject.incarceration.end).toLocaleDateString('en-US')}</p>
-            <button id="associates--${criminalObject.id}">Associate Alibis</button>
+    <div class="criminal">
+        <h4>${criminalObject.name}</h4>
+        <div class="criminal__details">
+            <p>Convicted for ${criminalObject.conviction}</p>
+            <p>Arrested by ${criminalObject.arrestingOfficer}</p>
+            <p>Incarcerated between:
+                ${new Date(criminalObject.incarceration.start).toLocaleDateString()} and
+                ${new Date(criminalObject.incarceration.end).toLocaleDateString()}
+            </p>
+            <p>Age: ${criminalObject.age}</p>
+            <div>
+                <h2>Facilities</h2>
+                <ul>
+                    ${facilities.map(f => `<li>${f.facilityName}</li>`).join("")}
+                </ul>
+            </div>
+            <button id="associates--${criminalObject.id}">Show Associates</button>
         </div>
+    </div>
     `
 }
 
