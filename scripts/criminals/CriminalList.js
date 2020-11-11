@@ -59,6 +59,8 @@ eventHub.addEventListener("crimeChosen", event => {
     // use the same property as in the event detail
     if (event.detail.crimeThatWasChosen !== "0") {
         const criminalsArray = useCriminals()
+        const facilities = useFacilities()
+        const crimFac = useCriminalFacilities()
 
         const convictionsArray = useConvictions()
 
@@ -70,7 +72,7 @@ eventHub.addEventListener("crimeChosen", event => {
             return criminalObj.conviction === convictionThatWasChosen.name
         })
 
-        render(filteredCriminalsArray)
+        render(filteredCriminalsArray, facilities, crimFac)
     }
 })
 
@@ -82,6 +84,8 @@ eventHub.addEventListener("officerSelected", event => {
         if (event.detail.officer !=="0") {
             //Get the list of officers
             const officersArray = useOfficers()
+            const facilities = useFacilities()
+            const crimFac = useCriminalFacilities()
             
             const criminalsArray = useCriminals()
 
@@ -94,7 +98,7 @@ eventHub.addEventListener("officerSelected", event => {
                 return criminalObj.arrestingOfficer === officerThatWasChosen.name
             })
 
-            render(filteredCriminalsArray)
+            render(filteredCriminalsArray, facilities, crimFac)
         }
 
 
