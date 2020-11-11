@@ -1,3 +1,5 @@
+const eventHub = document.querySelector(".container")
+
 export const Criminals = (criminalObject) => {
     return `
         <div class="criminal">
@@ -11,24 +13,30 @@ export const Criminals = (criminalObject) => {
     `
 }
 
+eventHub.addEventListener("click", alibiClick => {
+    const [prefix, criminalId] = alibiClick.target.id.split("--")
+
+    if (alibiClick.target.id.startsWith("associates--")) {
+        console.log("button was clicked", prefix, criminalId)
+
+        const newCustomEvent = new CustomEvent("alibiButtonClicked", {
+            detail: {
+                criminalId: criminalId
+                // something up with this^ and idk what
+            }
+        })
+    eventHub.dispatchEvent(newCustomEvent)        
+    }
+})
 
 
-
-
-// somehow need to get the name and the alibi of the known associates
-// need to iterate over the array to get the known_associate ^^
-// this is goiong to be part of a click event??
-// lets populate in an alert window
-// need to find where im using the criminals array and use that 
-// ill be using a promise - which means dont forget to use .then() method
-// make a render alibi funciton which uses an alert window
-
-// Which components do you need to create for this feature? ALIBI MODULE
+// Which components do you need to create for this feature? 
 // Where is the data coming from in the API? Do you need a new provider? NO
-// Which component should dispatch a custom event when the user clicks on the alibi button? CRIMINAL LIST?
-// Which component should react to that custom event?
-// Does data need to be send along with the event?
+// Which component should dispatch a custom event when the user clicks on the alibi button? CRIMINALs
+// Which component should react to that custom event? CRIMINAL LIST?
+// Does data need to be send along with the event? YES, BUT NOT SURE WHY...
 // Which DOM element would contain the list of alibis? Do you need a new one, or can they go in an existing one? A POP UP WINDOW, ID LIKE TO USE A NEW DOM ELEMENT
 
 
-// TO-DO make new alibi module, look at possible components, and then make corresponding components: ???
+
+
