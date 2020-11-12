@@ -7,6 +7,7 @@ import { OfficerSelect } from "./officers/OfficerSelect.js"
 import { NoteForm } from "./notes/NoteForm.js"
 import { NoteList } from "./notes/NoteList.js"
 import { DisplayFacilitiesButton } from "./facility/DisplayFacilitiesButton.js"
+import { FacilityList } from "./facility/FacilityList.js"
 
 
 NoteForm()
@@ -15,4 +16,5 @@ ConvictionSelect()
 OfficerSelect()
 NoteList()
 DisplayFacilitiesButton()
+FacilityList()
 

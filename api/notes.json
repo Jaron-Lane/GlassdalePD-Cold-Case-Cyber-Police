@@ -6,6 +6,13 @@
       "suspect": "asdf",
       "noteField": "asdf",
       "id": 1
+    },
+    {
+      "dateOfInterview": "",
+      "author": "Sherlock Holmes",
+      "suspect": "Rogelio Hills",
+      "noteField": "He's guilty",
+      "id": 2
     }
   ]
 }
