@@ -16,6 +16,10 @@ const criminalContent = document.querySelector(".criminalsContainer")
     })
 } */
 
+let facilities = []
+let crimFac = []
+let criminals = []
+
 export const CriminalList = () => {
     // Kick off the fetching of both collections of data
     getFacilities()
@@ -24,31 +28,31 @@ export const CriminalList = () => {
         .then(
             () => {
                 // Pull in the data now that it has been fetched
-                const facilities = useFacilities()
-                const crimFac = useCriminalFacilities()
-                const criminals = useCriminals()
+                facilities = useFacilities()
+                crimFac = useCriminalFacilities()
+                criminals = useCriminals()
 
                 // Pass all three collections of data to render()
-                render(criminals, facilities, crimFac)
+                render()
             }
         )
 }
 
-const render = (criminalsToRender, allFacilities, allRelationships) => {
+const render = () => {
   // Step 1 - Iterate all criminals
-  criminalContent.innerHTML = criminalsToRender.map(
+  criminalContent.innerHTML = criminals.map(
     (criminalObject) => {
         // Step 2 - Filter all relationships to get only ones for this criminal
-        const facilityRelationshipsForThisCriminal = allRelationships.filter(cf => cf.criminalId === criminalObject.id)
+        const facilityRelationshipsForThisCriminal = crimFac.filter(cf => cf.criminalId === criminalObject.id)
 
         // Step 3 - Convert the relationships to facilities with map()
-        const facilities = facilityRelationshipsForThisCriminal.map(cf => {
-            const matchingFacilityObject = allFacilities.find(facility => facility.id === cf.facilityId)
+        const matchTheFacilities = facilityRelationshipsForThisCriminal.map(cf => {
+            const matchingFacilityObject = facilities.find(facility => facility.id === cf.facilityId)
             return matchingFacilityObject
         })
 
         // Must pass the matching facilities to the Criminal component
-        return Criminals(criminalObject, facilities)
+        return Criminals(criminalObject, matchTheFacilities)
     }
 ).join("") 
 }
@@ -58,7 +62,9 @@ const render = (criminalsToRender, allFacilities, allRelationships) => {
 eventHub.addEventListener("crimeChosen", event => {
     // use the same property as in the event detail
     if (event.detail.crimeThatWasChosen !== "0") {
-        const criminalsArray = useCriminals()
+        criminalsArray = useCriminals()
+        // const facilities = useFacilities()
+        // const crimFac = useCriminalFacilities()
 
         const convictionsArray = useConvictions()
 
@@ -81,7 +87,9 @@ eventHub.addEventListener("officerSelected", event => {
     // Use the property you added to the event detail.
         if (event.detail.officer !=="0") {
             //Get the list of officers
-            const officersArray = useOfficers()
+            officersArray = useOfficers()
+            // const facilities = useFacilities()
+            // const crimFac = useCriminalFacilities()
             
             const criminalsArray = useCriminals()
 
