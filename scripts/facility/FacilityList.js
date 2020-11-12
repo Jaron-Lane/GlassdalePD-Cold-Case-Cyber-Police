@@ -1,7 +1,7 @@
 import { Facility } from "./Facility.js"
 import { getFacilities, useFacilities } from "./FacilityProvider.js"
-import { getCriminalFacilites, useCriminalFacilites } from "./CriminalFacilityProvider.js"
-// import { Facility } from "./Facility.js"
+// import { getCriminalFacilities, useCriminalFacilities } from "./CriminalFacilityProvider.js"
+
 
 const facilitiesContainer = document.querySelector(".facilityContainer")
 
